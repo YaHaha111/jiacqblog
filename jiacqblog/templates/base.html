@@ -1,0 +1,27 @@
+{% load static %}
+{% load blog_extras %}
+<html lang="en">
+
+
+  {% show_head %}
+
+
+  <body>
+	{% show_header %}
+
+	<!-- 上+左+右开始 -->
+	{% block main %}
+	{% endblock main %}
+
+	{% show_footer %}
+
+    <!-- 代码高亮模块 -->
+    <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        hljs.initLineNumbersOnLoad();
+    </script>
+
+  </body>
+</html>

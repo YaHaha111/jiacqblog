@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load comments_extras %}
+{% load blog_extras %}
+{% block main %}
+<!-- 上部分图片开始 -->
+<div class="header-img" style="background-image: url({{ post.img_url }});">
+    <div class="header-title">
+        <span>{{ post.title }}</span>
+    </div>
+    <div class="header-body">
+        <span class="cz-line"><i class="fa fa-calendar"></i><a href="#">&nbsp;发表于 {{ post.created_time|date:"Y-m-d H:i" }} </a></span>
+        <span class="cz-line"><i class="fa fa-eye"></i><a href="#"> 点击量 {{ post.views }}&nbsp;</a></span>
+        <span class="cz-line"><i class="fa fa-comments"></i><a href="#pinglun"> 评论量 {{ post.comment_set.count }}&nbsp;</a></span>
+        <span><i class="fa fa-refresh"></i><a href="#">&nbsp;最近更新 {{ post.modified_time|date:"Y-m-d H:i" }} </a></span>
+    </div>
+    <div class="header-body">
+        <span><i class="fa fa-book"></i><a href="{% url 'blog:categories_menu' %}"> 分类：{{ post.category.bigcategory }} </a>
+                            <i class="fa fa-chevron-circle-right"></i><a href="{% url 'blog:category' post.category.pk %}">&nbsp;{{ post.category.name }} </a></span>
+    </div>
+</div>
+<!-- 上部分图片结束 -->
+
+<!--左+右开始-->
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5 mb-5" >
+    <!--左+右居中开始-->
+    <div class="row mx-auto">
+        <!-- 左侧开始-->
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="kap-detail" >
+                <div class="col-11 detail">
+                    <div class="detail-header">
+                        <p><span>转载声明：</span>本篇博文内容为作者<span>{{ post.copyright }}</span>，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
+                        <p><span>作者：</span>{{ post.usr_name }}</p>
+                        <p><span>原文链接：</span><a target="_blank" href="{{ post.copy_url }}" title="点击跳转">{{ post.copy_url }}</a></p>
+                    </div>
+
+                    <div class="detail-body">
+						{{ post.body|safe }}
+                    </div>
+
+
+                    <div class="detail-footer row">
+                        <div class="col-sm-3">
+<!--                            <span class="badge badge-info shadow"><i class="fa fa-calendar"></i>-->
+<!--                                &nbsp;好评(55)</span>-->
+<!--                            <span class="badge badge-info shadow"><i class="fa fa-calendar"></i>-->
+<!--                                &nbsp;差评(55)</span>-->
+                        </div>
+                        <div class="col-sm-6 d-flex justify-content-center" >
+                            <div class="btn-s" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-th-large"></i>&nbsp;打赏
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <!-- 暂放留白 -->
+                        </div>
+                    </div>
+
+                    <div class="detail-footer row" >
+                        {% show_previous_next_post post.pk %}
+                    </div>
+                    <hr>
+					<!-- 评论开始 -->
+						{% show_comment_form post %}
+                    <hr>
+						{% show_comments post %}
+					<!-- 评论结束 -->
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- 左半部分结束 -->
+
+        <!-- 右侧菜单开始" -->
+        <div class="col-lg-3 col-md-12 col-sm-12 ">
+
+            {% show_panel %}
+            <div class="sticky-top" style="top: 70px">
+                <div class="side-kap mb-4">
+                    <div class="side-header"><a href="#">文章目录</a></div>
+                        <div class="side-body" >
+                        {% block toc %}
+                        {% if post.toc %}
+                            <ul class="directory" >
+                            {{ post.toc|safe }}
+                            </ul>
+                        {% else %}
+                            <p><span style="text-decoration:line-through;">这篇文章没有目录</span>&nbsp;(*^_^*)</p>
+                        {% endif %}
+                        {% endblock toc %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧菜单结束" -->
+
+        <script>
+            $('.directory>li>a, .directory>li>ul>li>a').click(function(){
+                $('.directory>li>a, .directory>li>ul>li>a').removeClass("active");
+                $(this).addClass("active");
+                // alert($(this).attr("class")); // 获取当前css
+            });
+        </script>
+
+    </div>
+    <!--左+右居中结束-->
+</div>
+<!--左+右结束-->
+
+
+
+
+
+<!-- 模态框开始 -->
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- 模态框头部 -->
+			<!-- <div class="modal-header bg-dark p-1" > -->
+			<!-- </div> -->
+			<!-- 模态框主体 -->
+			<div class="modal-body mx-auto text-center">
+				<hr style="width: 60%;">
+				<p>扫码即可打赏，感谢您的支持！</p>
+				<hr>
+				<div class="row">
+					<div class="col-sm-6">
+						<img src="https://7.dusays.com/2020/11/24/11aca063d888c.jpg" alt="支付宝" /></label>
+						<hr>
+						<img src="https://7.dusays.com/2020/11/24/a73724c768d69.jpg" class="img-thumbnail" alt="Cinque Terre" style="height: 200px; width: 200px;">
+					</div>
+					<div class="col-sm-6">
+						<img src="https://7.dusays.com/2020/11/24/408a2a846ae14.jpg" alt="微信" /></label>
+						<hr>
+						<img src="https://7.dusays.com/2020/11/24/a6f4819647d6b.jpg" class="img-thumbnail" alt="Cinque Terre" style="height: 200px; width: 200px;">
+
+					</div>
+				</div>
+				<hr style="width: 82%;">
+				<p>打开&nbsp;<strong style="color: #314977;">支付宝</strong> /
+                    <strong style="color: #39AF37;">微信</strong>&nbsp;<span>扫一扫</span>，即可进行扫码打赏哦</p>
+				<hr style="width: 82%;">
+			</div>
+			<!-- 模态框底部 -->
+			<div class="modal-footer p-1">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模态框结束 -->
+
+{% endblock main %}

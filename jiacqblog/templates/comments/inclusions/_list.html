@@ -1,0 +1,77 @@
+{% load comments_extras %}
+{% load static %}
+<div class="text-info mt-3 mb-3">
+    <p class="t18-bold"><i class="fa fa-chevron-circle-down"></i> 评论列表，共 {{ comment_count }} 条评论</p>
+</div>
+<!-- 评论开始 -->
+{% for comment in comment_list %}
+<hr id="{{ comment.name }}-{{ comment.id }}" style="width: 92%; margin-right: 6%">
+<div class="row mb-3 container com-card">
+	<div class="col-sm-1 com-card-height">
+		<img class="rounded " src="{% static 'blog/img/comment/snow1.jpg' %}" height="40">
+	</div>
+
+	<div class="col-sm-11">
+
+		<div class="com-card-height">
+			<span class="com-user">&nbsp;{{ comment.name }}&nbsp;</span>
+			<span class="com-date">&nbsp;&nbsp;{{ comment.created_time|date:"Y-m-d H:i" }}&nbsp;</span>
+
+			<a class="float-right" data-toggle="collapse" data-target="#form-comment-{{ comment.id }}" title="评论">
+				<i onmouseover="this.className='fa fa-comment'" onmouseout="this.className='fa fa-comment-o'"
+				   class="fa fa-comment-o"></i>&nbsp;{% if comment.c != 0 %}{{ comment.c }}{% endif %}</a>
+			<a id="praise-{{ comment.id }}" style="margin-right: 10px" class="float-right" title="点赞">
+				<i onmouseover="this.className='fa fa-thumbs-up'" onmouseout="this.className='fa fa-thumbs-o-up'"
+									  class="fa fa-thumbs-o-up"></i>&nbsp;
+				<span id="text-{{ comment.id }}">{% if comment.good_count != 0 %}{{ comment.good_count }}{% endif %}</span>
+			</a>
+		</div>
+
+<script>
+    $(document).ready(function(){
+        $('#praise-{{ comment.id }}').click(function(){
+            $.ajax({
+                url:"/comments/praise/{{ comment.id }}",
+                type:"post",
+                dataType:"json",
+                data:{
+                    csrfmiddlewaretoken:'{{ csrf_token }}',
+                },
+                success:function(result){
+                    $('#text-{{ comment.id }}').text(result.good_count)
+					alert(result.mesg)
+                }
+            })
+        })
+    })
+</script>
+
+		<!-- 评论内容开始 -->
+		<div class="com-card-text ">
+			{{ comment.text|safe }}
+
+			<!-- 回复表单开始-->
+			<div id="form-comment-{{ comment.pk }}" class="collapse kap-detail rounded mb-3">
+				{% show_reply_form comment userIP %}
+			</div>
+			<!-- 回复表单结束-->
+
+			<!-- 回复开始 -->
+			{% show_reply_list comment %}
+			<!-- 回复结束 -->
+		</div>
+		<!-- 评论内容结束 -->
+
+	</div>
+</div>
+{% empty %}
+	<div style="height: 80px;">暂无评论</div><hr style="width: 92%; margin-right: 6%">
+{% endfor %}
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
+<!-- 评论结束 -->
+

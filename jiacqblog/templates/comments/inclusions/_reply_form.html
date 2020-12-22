@@ -1,0 +1,60 @@
+{% load comments_extras %}
+<script type="text/javascript">
+    // 表单字符验证
+    $(function () {
+      $("#form-demo-rep").submit(function(event){
+        const f=$(this)
+        if(f[0].checkValidity()===false){
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        f.addClass("was-validated")
+      })
+
+    })
+</script>
+
+<form action="{% url 'comments:reply' comment.pk %}#{{ comment.name }}-{{ comment.id }}" method="post" novalidate id="form-demo-rep">
+    {% csrf_token %}
+    <div class="container text-info">
+
+        <div class="row mt-3">
+
+            <div class="input-group input-group-sm col-sm-5 mb-3">
+              <div class="input-group-prepend ">
+                <label class="" for="usr-{{ comment.id }}"><i class="fa fa-user-md"></i>&nbsp;昵称：&nbsp;</label>
+              </div>
+
+              <input id="usr-{{ comment.id }}" type="text" class="form-control rounded input-style usr-placeholder" placeholder="必填"
+                     required="required" pattern="(.|\n){3,15}" name="usr" value="{{ userIP.0.name }}">
+                <div class="invalid-feedback text-right"><small>请输入用户名3-15个字符！</small></div>
+            </div>
+
+            <div class="input-group input-group-sm col-sm-7 mb-3">
+              <div class="input-group-prepend">
+                <label for="email-{{ comment.id }}"><i class="fa fa-envelope"></i>&nbsp;邮箱：&nbsp;</label>
+              </div>
+
+              <input id="email-{{ comment.id }}" type="email" class="form-control rounded input-style email-placeholder"
+                     required="required" placeholder="必填" name="email" value="{{ userIP.0.email }}">
+              <div class="invalid-feedback">邮箱地址格式不正确！</div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="form-group">
+                <label for="comment-{{ comment.id }}"><i class="fa fa-comments"></i> 评论</label>
+            </div>
+
+            <div class="form-group ml-3 flex-grow-1">
+                <textarea id="comment-{{ comment.id }}" class="form-control rounded input-style comment-placeholder" rows="2" placeholder="支持Markdown."
+                          required="required"  name="comment"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" data-target="#form-comments" class="btn btn-sm btn-info shadow" value="提交评论">
+        </div>
+
+    </div>
+</form>

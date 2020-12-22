@@ -1,0 +1,33 @@
+
+
+<div class="side-kap mb-4">
+    <div class="side-header"><a href="#">标签云</a></div>
+
+    <div class="container">
+        {% for tag in tag_list %}
+          <a href="{% url 'blog:tag' tag.pk %}" style="word-wrap: break-spaces; text-decoration: none;">
+              <span id="tags" class="tags-style1">{{ tag.name }}</span>
+          </a>
+        {% empty %}
+          暂无标签！
+        {% endfor %}
+    </div>
+</div>
+
+<script type="text/javascript">
+    // 随机标签云颜色
+    $(function () {
+        function tags_random() {
+        var dom = document.getElementsByClassName("tags-style1");
+        var color_list = ["tags-style1", "tags-style2", "tags-style3", "tags-style4", "tags-style5",
+            "tags-style6"];
+        var color_num = color_list.length;//color_list颜色数量
+        for (var i = 0; i < dom.length; i++) {
+            var n = Math.floor(Math.random() * Math.floor(color_num)); // 随机颜色
+            dom[i].classList.add(color_list[n]);
+        }
+    }
+    tags_random()
+    // setInterval(tags_random, 200)
+    });
+</script>

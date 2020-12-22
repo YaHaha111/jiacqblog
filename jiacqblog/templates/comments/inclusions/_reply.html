@@ -1,0 +1,70 @@
+{% load static %}
+{% load comments_extras %}
+{% for reply in reply_list %}
+<hr>
+<div class="com-card row">
+	<div class="col-sm-1 com-card-height">
+		<img class="rounded" src="{% static 'blog/img/comment/snow2.jpg' %}" height="40">
+	</div>
+
+	<div class="col-sm-11">
+		<div class="com-card-height">
+            <div>
+                <span class="com-user">&nbsp;{{ reply.name }}&nbsp;</span>
+                <span class="com-date">&nbsp;&nbsp;{{ reply.created_time|date:"Y-m-d H:i" }}&nbsp;</span>
+
+                <a class="float-right" href="#" data-toggle="collapse" data-target="#reply-form-{{ reply.rep_com.pk }}-{{ reply.pk }}">
+                    <i onmouseover="this.className='fa fa-comment'" onmouseout="this.className='fa fa-comment-o'"
+                       class="fa fa-comment-o"></i>&nbsp;</a>
+                <a id="praiserep-{{ reply.id }}" style="margin-right: 10px" class="float-right" title="点赞">
+					<i onmouseover="this.className='fa fa-thumbs-up'" onmouseout="this.className='fa fa-thumbs-o-up'"
+                                          class="fa fa-thumbs-o-up"></i>&nbsp;
+					<span id="textrep-{{ reply.id }}">{% if reply.good_count != 0 %}{{ reply.good_count }}{% endif %}</span>
+			</a>
+            </div>
+
+<script>
+    $(document).ready(function(){
+        $('#praiserep-{{ reply.id }}').click(function(){
+            $.ajax({
+                url:"/comments/praiserep/{{ reply.id }}",
+                type:"post",
+                dataType:"json",
+                data:{
+                    csrfmiddlewaretoken:'{{ csrf_token }}',
+                },
+                success:function(result){
+                    $('#textrep-{{ reply.id }}').text(result.good_count)
+					alert(result.mesg)
+                }
+            })
+        })
+    })
+</script>
+
+            <div class="ml-2">
+                <span class="reply-user">回复&nbsp;：<a class="reply-name" href="#{{ reply.rep_com.name }}-{{ reply.rep_com.id }}">
+                   @<span style="font-size: 14px; ">
+					{% if forloop.counter == 1 %}{{ reply.rep_com.name }}
+					{% else %}{{ reply.reply_again.name }}
+					{% endif %}
+					&nbsp;</span></a></span>
+            </div>
+		</div>
+
+		<!-- 评论内容开始 -->
+		<div id="form-reply-{{ reply.rep_com.pk }}-{{ reply.pk }}" class="com-card-text mt-2">
+			{{ reply.text|safe }}
+		</div>
+		<!-- 评论内容结束 -->
+
+		<!-- 回复表单开始-->
+		<div id="reply-form-{{ reply.rep_com.pk }}-{{ reply.pk }}" class="collapse kap-detail rounded mb-3">
+			{% show_reply_again_form reply userIP %}
+		</div>
+		<!-- 回复表单结束-->
+
+	</div>
+
+</div>
+{% endfor %}

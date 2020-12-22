@@ -1,0 +1,19 @@
+
+<div class="side-kap mb-4">
+    <div class="side-header">
+        <a href="#">日期归档</a>
+    </div>
+
+    <div class="side-body" >
+        {% for date in date_list %}
+        <div class="side-body-menu">
+            <a class="date-one" href="{% url 'blog:archive' date.three.year date.three.month %}">
+                {{ date.one }}
+            </a>
+            <span class="com-date pull-right">{{ date.two|floatformat }} 篇</span>
+        </div>
+        {% empty %}
+          暂无文章！
+        {% endfor %}
+    </div>
+</div>

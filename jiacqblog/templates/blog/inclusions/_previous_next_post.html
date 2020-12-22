@@ -1,0 +1,19 @@
+
+<div class="col-sm-6 post-img">
+    <div class="post-img-left" style="background-image: url('{{ post_revious.img_url }}');">
+        <a href="{{ post_revious.get_absolute_url }}" class="post-text-left">
+            上一篇
+        <br>
+            <span>{{ post_revious.title }}</span>
+        </a>
+    </div>
+</div>
+<div class="col-sm-6 post-img">
+    <div class="post-img-right" style="background-image: url('{{ post_next.img_url }}');">
+        <a href="{{ post_next.get_absolute_url }}" class="post-text-right">
+            下一篇
+        <br>
+            <span>{{ post_next.title }}</span>
+        </a>
+    </div>
+</div>

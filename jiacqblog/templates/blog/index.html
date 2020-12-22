@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load blog_extras %}
+{% block main %}
+
+<!-- 上部分图片显示 -->
+<div class="index-img z-index1" style="background-image: url({{ img_url.0.index_img }});">
+    <div class="div-center">
+        <span style="font-size: 40px; color: #117a8b; font-weight: bold;">{{ img_url.0.name }}</span>
+        <br><br><span id="text" style="font-size: 22px; color: #117a8b; "></span>
+
+    </div>
+
+    <div style="padding-top: 50%; text-align: center">
+        <a href="#tt" class="scroll-tb" style=""><i class="fa fa-chevron-down"></i></a>
+    </div>
+</div>
+
+<script>
+  let divTyping = document.getElementById('text')
+  let i = 0,
+    timer = 0,
+    str = '{{ img_url.0.motto }} O(∩_∩)O !'
+
+  function typing() {
+    if (i <= str.length) {
+      divTyping.innerHTML = str.slice(0, i++) + '|'
+      timer = setTimeout(typing, 200)
+    }
+    else {
+        divTyping.innerHTML = str//结束打字,移除光标
+        clearTimeout(timer)
+    }
+  }
+  typing()
+</script>
+<!-- 上部分图片结束-->
+
+<div id="tt" class="z-index1"></div>
+
+<!--左+右开始-->
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5 z-index1 mb-5">
+    <!--左+右居中开始-->
+    <div class="row mx-auto">
+        <!-- 左侧开始-->
+        <div class="col-lg-9 col-md-12 col-sm-12">
+		  {% for post in post_list %}
+            {%  if forloop.counter|divisibleby:"2" %}
+            <div class="mb-4 row kap">
+
+                <div class="col-lg-7 col-sm-12 kap-side">
+                    <div class="kap-side-header">
+                        <a href="{{ post.get_absolute_url }}" data-toggle="tooltip" title="{{ post.title }}">
+							{{ post.title|truncatechars:18 }}
+						</a>
+                    </div>
+
+                    <div class="kap-side-span">
+                        <span class="cz-line"><i class="fa fa-calendar"></i><a href="#">&nbsp;发表于 {{ post.created_time|date:"Y-m-d H:i" }} </a></span>
+                        <span class="cz-line"><i class="fa fa-eye"></i><a href="#"> 点击量 {{ post.views }}&nbsp;</a></span>
+                        <span><i class="fa fa-comments"></i><a href="{{ post.get_absolute_url }}#pinglun"> 评论量 {{ post.comment_set.count }}&nbsp;</a></span>
+                    </div>
+
+                    <div class="kap-side-body">
+                        <a class="kap-side-body" href="{{ post.get_absolute_url }}">
+							{{ post.excerpt }}...
+						</a>
+                    </div>
+
+
+                    <div class="kap-side-footer">
+                        <span style="font-style: italic"><i class="fa fa-book"></i><a href="{% url 'blog:categories_menu' %}">&nbsp;{{ post.category.bigcategory }}&nbsp;</a>
+                            <i class="fa fa-chevron-circle-right"></i><a href="{% url 'blog:category' post.category.pk %}">&nbsp;{{ post.category.name }}&nbsp;</a></span>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-5 col-sm-12 kap-img">
+                    <a href="{{ post.get_absolute_url }}">
+                        <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+
+           {% else %}
+
+            <div class="mb-4 row kap">
+
+                <div class="col-lg-5 col-sm-12 kap-img">
+                    <a href="{{ post.get_absolute_url }}">
+                        <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-7 col-sm-12 kap-side" >
+                    <div class="kap-side-header">
+                        <a href="{{ post.get_absolute_url }}" data-toggle="tooltip" title="{{ post.title }}">
+							{{ post.title|truncatechars:18 }}
+						</a>
+                    </div>
+
+                    <div class="kap-side-span">
+                        <span class="cz-line"><i class="fa fa-calendar"></i><a href="#">&nbsp;发表于 {{ post.created_time|date:"Y-m-d H:i" }} </a></span>
+                        <span class="cz-line"><i class="fa fa-eye"></i><a href="#"> 点击量 {{ post.views }}&nbsp;</a></span>
+                        <span><i class="fa fa-comments"></i><a href="{{ post.get_absolute_url }}#pinglun"> 评论量 {{ post.comment_set.count }}&nbsp;</a></span>
+                    </div>
+
+                    <div class="kap-side-body">
+                        <a class="kap-side-body" href="{{ post.get_absolute_url }}">
+							{{ post.excerpt }}...
+						</a>
+                    </div>
+
+                    <div class="kap-side-footer">
+                        <span style="font-style: italic"><i class="fa fa-book"></i><a href="{% url 'blog:categories_menu' %}">&nbsp;{{ post.category.bigcategory }}&nbsp;</a>
+                            <i class="fa fa-chevron-circle-right"></i><a href="{% url 'blog:category' post.category.pk %}">&nbsp;{{ post.category.name }}&nbsp;</a></span>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endif %}
+          {% empty %}
+            暂无文章！
+		  {% endfor %}
+            <!-- 页码开始 -->
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                {% if post_list.has_previous %}
+                <li class="previousPage"><a href="?page={{ post_list.previous_page_number }}#tt" title="上一页"></a></li>
+                {% endif %}
+                <li>
+                    <ol>
+                    {% for pg in post_list.paginator.page_range %}
+                        {% circle_page post_list.number pg %}
+                    {% endfor %}
+                    </ol>
+                </li>
+
+                {% if post_list.has_next %}
+                <li class="nextPage"><a href="?page={{ post_list.next_page_number }}#tt" title="下一页"></a></li>
+                {% endif %}
+                </ul>
+            </div>
+            <!-- 页码结束 -->
+        </div>
+
+        <!-- 左侧结束-->
+
+
+        <!-- 右侧菜单开始" -->
+        <div class="col-lg-3 col-md-12 col-sm-12">
+            {% show_panel %}
+            {% show_recent_posts %}
+            {% show_categories %}
+            {% show_archives %}
+            {% show_views_max %}
+            {% show_tags %}
+        </div>
+        <!-- 右侧菜单结束" -->
+    </div>
+    <!--左+右居中结束-->
+</div>
+<!--左+右结束-->
+
+{% endblock main %}

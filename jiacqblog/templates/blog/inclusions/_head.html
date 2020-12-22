@@ -1,0 +1,60 @@
+{% load static %}
+
+<head>
+	<title>{{ img_url.0.name }}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- 头像 -->
+	<link href="{{ img_url.0.icon }}" rel="icon">
+	<link href="{{ img_url.0.apple_touch_icon }}" rel="apple-touch-icon">
+
+	<!-- 通用样式文件 -->
+	<link rel="stylesheet" href="{% static 'blog/bootstrap4/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'blog/bootstrap4/css/bootstrap.css' %}">
+<!--	<script src="{% static 'blog/bootstrap4/js/jquery.min.js' %}"></script>-->
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script src="{% static 'blog/bootstrap4/js/bootstrap.min.js' %}"></script>
+	<!-- 小图标 -->
+	<link rel="stylesheet" href="{% static 'blog/css/font-awesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'blog/css/font-awesome/css/font-awesome.css' %}">
+    <!--    自定义样式-->
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'blog/css/style-comment.css' %}">
+	<link rel="stylesheet" href="{% static 'blog/css/header-style.css' %}">
+	<!-- 自定义代码块样式 -->
+	<link rel="stylesheet" href="{% static 'blog/css/code-block.css' %}">
+
+
+    <script src='https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js'></script>
+
+    <style rel="stylesheet">
+        .detail .detail-body .hljs::before {
+            content: url({{ img_url.0.dmk_img }});
+            margin-top: -20px;
+            margin-left: -20px;
+            position: absolute;
+        }
+
+        .detail .detail-body h1{
+            background:url({{ img_url.0.h12_img }}) left no-repeat
+        }
+        .detail .detail-body h2{
+            background:url({{ img_url.0.h12_img }}) left no-repeat
+        }
+
+        .detail .detail-body h3{
+            background:url({{ img_url.0.h34_img }}) left no-repeat
+        }
+        .detail .detail-body h4{
+            background:url({{ img_url.0.h34_img }}) left no-repeat
+        }
+
+        .detail .detail-body h5{
+            background:url({{ img_url.0.h56_img }}) left no-repeat
+        }
+        .detail .detail-body h6{
+            background:url({{ img_url.0.h56_img }}) left no-repeat
+        }
+    </style>
+
+</head>

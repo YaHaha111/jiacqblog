@@ -1,0 +1,25 @@
+
+{% load static %}
+<div class="side-kap mb-4">
+    <div class="side-header"><a href="#">浏览量</a></div>
+    <div class="side-body">
+        {% for views_max in views_max_list %}
+        <div class="side-body-menu d-flex">
+            <a href="{{ views_max.get_absolute_url }}">
+                <div class="side-body-menu-img">
+                    <img class="side-body-menu-img-bg" width="60" height="50" style="background-image: url({{ views_max.img_url }}); ">
+                </div>
+            </a>
+
+            <div class="side-body-menu-title" >
+                <a href="{{ views_max.get_absolute_url }}" data-toggle="tooltip" title="{{ views_max.title }}">
+                    {{ views_max.title}}</a>
+                <br>
+                    <a class="com-date pull-right">{{ views_max.views }}&nbsp;<i class="fa fa-eye"></i></a>
+            </div>
+        </div>
+        {% empty %}
+          暂无文章！
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<!-- 水平导航栏开始 -->
+<header style="height: 60px">
+  <div id="fix_nav" class="container-fluid" >
+    <nav class="navbar navbar-expand-md">
+      <a class="blog-logo" href="{% url 'blog:index' %}">
+        <img src="{{ img_url.0.icon }}" class="img-logo" >
+        {{ img_url.0.name }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span><i class="fa fa-navicon text-dark" style="font-size:18px;"></i></span>
+      </button>
+      <div class="collapse navbar-collapse " id="collapsibleNavbar">
+        <ul class="navbar-nav ml-md-auto ">
+          {% for f in f_menu %}
+          {% if f.show %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-menu" data-toggle="dropdown">
+              {{ f.icon|safe }}&nbsp;{{ f.name }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right" style="min-width: {{ f.z_width }}px;">
+              {% for z in z_menu %}
+              {% if f == z.onemenu %}
+              <a class="dropdown-item" href="{{ z.url|safe }}">{{ z.icon|safe }}&nbsp;&nbsp;{{ z.name }}</a>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item ">
+            <a class="nav-link text-menu" href="{{ f.url|safe }}">{{ f.icon|safe }}&nbsp;{{ f.name }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+<script>
+  var fix_length = 60;//设置导航滚动到多少再消失(可自己设置)
+  var $nav = $('#fix_nav');// 获取导航节点
+  var navTop = $nav.offset().top;// 获取导航节点距离顶部位置
+  // var navH = $nav.outerHeight();// 获取导航的高度(包括border)
+  var winTop_1 = 0;// 设置初始位置
+  // var winWidth = $(window).width();// 判断浏览器宽度(可用于自适应是否启用此效果)
+  // 判断滚动条
+  $(window).on('scroll',function(){
+    // 滚动条距离顶部距离
+    var winTop_2 = $(window).scrollTop();
+    //开始浮动，不过不显示
+    if(winTop_2 > navTop){
+      $nav.addClass('fixed-nav');
+      if(winTop_2 > winTop_1){
+        $nav.addClass('fix_sec');
+        if(winTop_2 > fix_length){
+          $nav.removeClass('fix_sec');
+        }
+      }
+    }else{
+      $nav.removeClass('fixed-nav');
+    }
+    //判断鼠标向上滚动，显示出来
+    if(winTop_2 > winTop_1){
+      $nav.removeClass('fixed-nav-appear');
+    }else if(winTop_2 < winTop_1){
+      $nav.addClass('fixed-nav-appear');
+      $nav.removeClass('fix_sec');
+    }
+    // 滚动后距离赋值
+    winTop_1 = $(window).scrollTop();
+  })
+</script>
+<!-- 水平导航栏结束 -->

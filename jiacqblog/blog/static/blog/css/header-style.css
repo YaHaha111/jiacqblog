@@ -1,0 +1,99 @@
+/*鼠标事件控制水平导航栏事件 开始*/
+
+.z-index1 {
+    position: relative;
+    z-index: 1;
+}
+/*全局*/
+#fix_nav{
+    position: fixed;
+    z-index: 99999;
+}
+/*下滑*/
+.fixed-nav{
+    background-color: rgba(85, 126, 129, 0.87);
+    width:100%;
+    top:-60px;
+    -webkit-transition: top .5s;
+     -moz-transition: top .5s;
+     -o-transition: top .5s;
+     transition: top .5s;
+}
+/*到达顶部*/
+.fixed-nav-appear{
+    top:0;
+}
+/*上滑*/
+.fix_sec{
+    width:100%;
+    top:0;
+    -webkit-transition: top .5s;
+    -moz-transition: top .5s;
+    -o-transition: top .5s;
+    transition: top .5s;
+}
+/*鼠标事件控制水平导航栏事件 结束*/
+
+
+/*水平导航栏自定义样式*/
+
+
+/*LOGO字体样式*/
+.blog-logo {
+    font-size: 22px;
+    font-weight: bold;
+    /*color: rgba(0, 0, 0, 0.9);*/
+    color: #fff;
+}
+.blog-logo:hover {
+    color: rgba(42,169,188, 0.99);
+    text-decoration: none;
+}
+.img-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.img-logo:hover {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+.blog-logo:hover .img-logo {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+
+/*菜单字体样式*/
+.text-menu {
+    color: rgba(233, 233, 233, 0.9);
+    font-size: 14px;
+}
+.text-menu:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/*多选字体样式*/
+
+/* 下拉自动弹出效果 */
+.dropdown:hover>.dropdown-menu {
+	display: block;
+}
+.dropdown>.dropdown-toggle:active {
+	pointer-events: none;
+}
+.dropdown>.dropdown-menu {
+	/*background-image: linear-gradient(to right, #AABBE9, #565C6C, #212A3D);*/
+    background-color: #F6F8F9;
+}
+.dropdown>.dropdown-menu>.dropdown-item{
+	color: #4D4948;
+    font-size: 14px;
+}
+.dropdown>.dropdown-menu>.dropdown-item:hover {
+	background-color: rgba(85, 126, 129, 0.8);
+    color: rgba(253, 253, 253, 0.9);
+}

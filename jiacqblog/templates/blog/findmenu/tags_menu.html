@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load blog_extras %}
+{% block main %}
+
+<!-- 上部分图片显示 -->
+<div class="header-img" style="background-image: url('https://7.dusays.com/2020/11/25/f6582fd4280a3.jpg');">
+    <div class="header-title">
+        <span style="color: #0b2e13"> 标签云 </span>
+    </div>
+</div>
+<!-- 上部分图片结束-->
+
+<div id="tt" ></div>
+
+<!--左+右开始-->
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5 mb-5" >
+    <!--左+右居中开始-->
+    <div class="row mx-auto">
+        <!-- 左侧开始-->
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="kap-detail" style="height: 1700px; ">
+                <div class="col-11 detail ">
+                    <div style="height: 1640px;  margin-top: 60px; text-align: center">
+
+                    {% for tag in tag_list %}
+                      <a href="{% url 'blog:tag' tag.pk %}" class="tags-a">
+                          <span id="tags-menu" class="tags-menu1">{{ tag.name }}<span style="font-size: 13px">({{ tag.c }})</span></span>
+                      </a>
+                    {% endfor %}
+
+                    </div>
+                 </div>
+            </div>
+
+<script type="text/javascript">
+    // 随机标签云颜色
+    $(function () {
+        function tags_random() {
+        var dom = document.getElementsByClassName("tags-menu1");
+        var color_list = ["tags-menu1", "tags-menu", "tags-menu3", "tags-menu4", "tags-menu5",
+            "tags-menu6", "tags-menu7", "tags-menu8", "tags-menu9", "tags-menu10", "tags-menu11", "tags-menu12"];
+        var color_num = color_list.length;//color_list颜色数量
+        for (var i = 0; i < dom.length; i++) {
+            var n = Math.floor(Math.random() * Math.floor(color_num)); // 随机颜色
+            dom[i].classList.add(color_list[n]);
+        }
+    }
+    tags_random()
+    // setInterval(tags_random, 200)
+    });
+</script>
+
+            <!-- 页码开始 -->
+            <div class="d-flex justify-content-center">
+
+            </div>
+            <!-- 页码结束 -->
+
+        </div>
+        <!-- 左侧结束-->
+
+        <!-- 右侧菜单开始" -->
+        <div class="col-lg-3 col-md-12 col-sm-12">
+            {% show_panel %}
+            {% show_recent_posts %}
+            {% show_views_max %}
+        </div>
+        <!-- 右侧菜单结束" -->
+    </div>
+    <!--左+右居中结束-->
+</div>
+<!--左+右结束-->
+{% endblock main %}

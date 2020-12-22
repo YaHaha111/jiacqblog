@@ -1,0 +1,41 @@
+{% extends 'base_style.html' %}
+{% load static %}
+{% block main %}
+<!-- 上部分图片显示 -->
+<div class="header-img" style="background-image: url({% static 'blog/img/shili/j-4.png' %});">
+
+</div>
+
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5">
+    <div class="row mx-auto">
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="mb-4 row kap">
+                <div class="col-lg-5 col-sm-12 kap-img">
+                    <div class="kap-img-bg" style="background-image: url({% static 'blog/img/shili/j-4.png' %}) ">
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-sm-12 kap-side">
+                    <div class="kap-side-header">
+                        <a href="{% url 'blog:detail1' %}">在脚本中使用在脚本中使用在脚用在脚本中使用..</a>
+                    </div>
+
+                    <div class="kap-side-span">
+                        <span class="cz-line"><i class="fa fa-calendar"></i><a href="#">&nbsp;发表于 2020-11-06 9:00 </a></span>
+                        <span class="cz-line"><i class="fa fa-eye"></i><a href="#"> 点击量 500&nbsp;</a></span>
+                        <span><i class="fa fa-comments"></i><a href="#pinglun"> 评论量 50&nbsp;</a></span>
+                    </div>
+
+                    <div class="kap-side-body">
+                        <a class="kap-side-body" href="#">为了防止博客首提升加载的文章过多以及提升加载速度，可以对文章列表进行分页展示。不过这需要比较多的文章才能达到分页效果，但本地开发时一般都只有几...</a>
+                    </div>
+
+                    <div class="kap-side-footer">
+                        <span><i class="fa fa-book"></i><a href="#"> 分类：归档文章汇总 </a>
+                            <i class="fa fa-chevron-circle-right"></i><a href="#">&nbsp;归档文章汇总 </a></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+{% endblock main %}

@@ -1,0 +1,39 @@
+<div class="side-kap mb-4" >
+    <div class="side-header">
+        <a href="#">分类</a>
+    </div>
+
+    <div class="side-body" >
+
+            {% for bigcategory in bigcategory_list %}
+            <div class="slide">
+                <div class="slide-header">
+                    <a><i class="fa fa-angle-left pull-right mr-2"></i>
+                        {{ bigcategory.name }}
+                    </a>
+                </div>
+                <ul>
+                {% for category in category_list %}
+                    {% if bigcategory.pk == category.bigcategory.pk %}
+                        <li><a href="{% url 'blog:category' category.pk %}">
+                            {{ category.name }}<span class="com-date pull-right">{{ category.c }} 篇</span>
+                        </a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+            {% empty %}
+              暂无分类！
+            {% endfor %}
+
+    </div>
+</div>
+<script>
+
+    $(document).ready(function(){
+      $(".slide ul").hide();
+      $(".slide-header>a").click(function(){
+          $(this).parent().next().slideToggle();
+      });
+});
+</script>

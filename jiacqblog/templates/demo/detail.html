@@ -1,0 +1,112 @@
+{% extends 'base_style.html' %}
+{% load static %}
+{% block main %}
+<!-- 上部分图片显示 -->
+<div class="header-img" style="background-image: url({% static 'blog/img/shili/j-4.png' %});">
+    <div class="header-title">
+        <span>Hexo博客之butterfly主题优雅魔改系列（持续更新）</span>
+    </div>
+    <div class="header-body">
+        <span class="cz-line"><i class="fa fa-calendar"></i><a href="#">&nbsp;发表于 2020-11-06 9:00 </a></span>
+        <span class="cz-line"><i class="fa fa-eye"></i><a href="#"> 点击量 500&nbsp;</a></span>
+        <span class="cz-line"><i class="fa fa-comments"></i><a href="#pinglun"> 评论量 50&nbsp;</a></span>
+        <span><i class="fa fa-refresh"></i><a href="#">&nbsp;最近更新 2020-11-06 9:00 </a></span>
+    </div>
+    <div class="header-body">
+        <span><i class="fa fa-book"></i><a href="#"> 分类：归档文章汇总 </a>
+                            <i class="fa fa-chevron-circle-right"></i><a href="#">&nbsp;归档文章汇总 </a></span>
+    </div>
+</div>
+
+<!-- 中间部分内容呈现 -->
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5">
+    <div class="row mx-auto">
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="kap-detail">
+                <div class="col-11 detail">
+                    <div class="detail-header">
+                        <p><span>声明：</span>本篇博文内容为作者原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
+                        <p><span>作者：</span>jiacq</p>
+                        <p><span>链接：</span>http://127.0.0.1:8000/blog/detail1</p>
+                    </div>
+
+                    <div class="detail-body">
+
+
+<p>为了防止博客首页展示的文章过多以及提升加载速度，可以对文章列表进行分页展示。不过这需要比较多的文章才能达到分页效果，但本地开发时一般都只有几篇测试文章，如果一篇篇手工添加将会非常麻烦。</p>
+<p>解决方案是我们可以写一个脚本，自动生成任意数量的测试数据。脚本写好后，只需运行脚本就可以往数据库填充大量测试数据。脚本就是一段普通的 Python 代码，非常简单，但是通过这个脚本你将学会如何在 django 外使用 ORM，而不仅仅在 django 应用的内部模块使用。</p>
+
+                    </div>
+
+                    <div class="detail-footer row">
+                        <div class="col-sm-3">
+<!--                            <span class="badge badge-info shadow"><i class="fa fa-calendar"></i>-->
+<!--                                &nbsp;好评(55)</span>-->
+<!--                            <span class="badge badge-info shadow"><i class="fa fa-calendar"></i>-->
+<!--                                &nbsp;差评(55)</span>-->
+                        </div>
+                        <div class="col-sm-6 d-flex justify-content-center" >
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">
+                              <i class="fa fa-thumbs-up"></i>&nbsp;打赏</button>
+                        </div>
+
+                        <div id="pinglun" class="col-sm-3">
+                            <!-- 暂放留白 -->
+                        </div>
+                    </div>
+
+                    <div class="detail-footer row" >
+                        <div class="col-sm-6" style="background-position: center; background-image: url({% static 'blog/img/shili/j-3.jpg' %}); height: 150px; background-size: cover;">
+                            <a style="text-decoration: none; line-height: 150px;" href="#">上一篇</a>
+                            <a style="text-decoration: none; line-height: 140px;" href="#">上一篇</a>
+                        </div>
+
+                        <div class="col-sm-6" style="background-position: center; background-image: url({% static 'blog/img/shili/j-2.jpg' %}); height: 150px; background-size: cover; ">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+<!-- 模态框开始 -->
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- 模态框头部 -->
+			<!-- <div class="modal-header bg-dark p-1" > -->
+			<!-- </div> -->
+			<!-- 模态框主体 -->
+			<div class="modal-body mx-auto">
+				<hr>
+				<p>扫码即可打赏，感谢您的支持！</p>
+				<hr>
+				<div class="row">
+					<div class="col-sm-6">
+						<img src="{% static 'blog/img/alipay-logo.jpg' %}" alt="支付宝" /></label>
+						<hr>
+						<img src="{% static 'blog/img/alipay.jpg' %}" class="img-thumbnail" alt="Cinque Terre" style="height: 200px; width: 200px;">
+					</div>
+					<div class="col-sm-6">
+						<img src="{% static 'blog/img/wechat-logo.jpg' %}" alt="微信" /></label>
+						<hr>
+						<img src="{% static 'blog/img/weipay.jpg' %}" class="img-thumbnail" alt="Cinque Terre" style="height: 200px; width: 200px;">
+
+					</div>
+				</div>
+				<hr>
+				<p>打开&nbsp;<strong>支付宝 / 微信</strong>&nbsp;扫一扫，即可进行扫码打赏哦</p>
+				<hr>
+			</div>
+			<!-- 模态框底部 -->
+			<div class="modal-footer p-1">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模态框结束 -->
+
+
+{% endblock main %}

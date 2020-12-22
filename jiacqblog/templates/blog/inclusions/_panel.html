@@ -1,0 +1,45 @@
+
+<div class="side-kap mb-4">
+    <div class="side-kap-logo">
+        <div class="mt-3" >
+            <p class="text-center"><a href="#">
+                <img src="{{ img_url.0.blog_photo }}" class="roundpic-100" ></a></p>
+        </div>
+        <div  class="text-center mt-3">
+            <a class="side-Logo" style="text-decoration: none;" href="#">{{ img_url.0.name }}</a>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="side-fenlei-kap" style=" margin-left: 10%;  ">
+                <a href="#">文章数</a>
+                <br>
+                <a href="#">{{ post_count }}</a>
+            </div>
+
+           <div class="side-fenlei-kap" style="margin-left: -5%;">
+                <a href="#">分类</a>
+                <br>
+                <a href="#">{{ category_count }}</a>
+            </div>
+
+            <div class="side-fenlei-kap" style="margin-left: -5%;">
+                <a href="#">点击量</a>
+                <br>
+                <a href="#">{{views_count.views__sum}}</a>
+            </div>
+
+        </div>
+
+        <div class="mt-3 text-center">
+            <a class="side-Logo-text">{{ img_url.0.motto }}</a>
+        </div>
+
+        <div class="mt-3">
+            <div class="box wiggle">
+                <a target="_blank" href="/admin/"><i class="fa fa-bullhorn"></i> WelCome</a>
+            </div>
+        </div>
+
+    </div>
+</div>

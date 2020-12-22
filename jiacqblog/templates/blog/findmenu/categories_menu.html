@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load blog_extras %}
+{% block main %}
+
+<!-- 上部分图片显示 -->
+<div class="header-img" style="background-image: url('https://7.dusays.com/2020/11/25/f6582fd4280a3.jpg');">
+    <div class="header-title">
+        <span style="color: #0b2e13"> 分门别类 </span>
+    </div>
+</div>
+<!-- 上部分图片结束-->
+
+<div id="tt" ></div>
+
+<!--左+右开始-->
+<div class="container-fluid col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-5 mb-5" >
+    <!--左+右居中开始-->
+    <div class="row mx-auto">
+        <!-- 左侧开始-->
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="kap-detail" >
+                <div class="col-11 detail">
+                    <div style="margin-top: 60px; margin-bottom: 60px;">
+                        <ul class="list">
+                            {% for bigcategory in bigcategory_list %}
+                            <hr>
+                            <li><span>{{ bigcategory.name }}</span></li>
+                                <ol>
+                                {% for category in category_list %}
+                                    {% if bigcategory.pk == category.bigcategory.pk %}
+                                    <li>
+                                        <a href="{% url 'blog:category' category.pk %}">
+                                            {{ category.name }}
+                                            <span class="pull-right mr-3">{{ category.c }}</span></a>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ol>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                 </div>
+            </div>
+            <!-- 页码开始 -->
+            <div class="d-flex justify-content-center">
+
+            </div>
+            <!-- 页码结束 -->
+
+        </div>
+        <!-- 左侧结束-->
+
+        <!-- 右侧菜单开始" -->
+        <div class="col-lg-3 col-md-12 col-sm-12">
+            {% show_panel %}
+            {% show_recent_posts %}
+            {% show_views_max %}
+        </div>
+        <!-- 右侧菜单结束" -->
+    </div>
+    <!--左+右居中结束-->
+</div>
+<!--左+右结束-->
+{% endblock main %}
