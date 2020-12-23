@@ -4,11 +4,7 @@
     <div class="side-body">
         {% for post in recent_post_list %}
         <div class="side-body-menu d-flex">
-            <a href="{{ post.get_absolute_url }}">
-                <div class="side-body-menu-img">
-                    <img class="side-body-menu-img-bg" width="60" height="50" style="background-image: url({{ post.img_url }}); ">
-                </div>
-            </a>
+            <div class="side-body-menu-img"><img class="side-body-menu-img-bg" width="60" height="50" style="background-image: url({{ post.img_url }}); "></div>
             <div class="side-body-menu-title" >
                 <a href="{{ post.get_absolute_url }}" data-toggle="tooltip" title="{{ post.title }}">
                     {{ post.title }}</a>

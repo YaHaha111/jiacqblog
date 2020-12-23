@@ -48,12 +48,10 @@
                                 <li>
                                     <span></span>
                                     <div class="archives-menu d-flex">
-                                        <a href="{{ post.get_absolute_url }}">
-                                            <div class="archives-menu-img">
-                                                <img class="archives-menu-img-bg" width="50" height="50"
-                                                     style="background-image: url({{ post.img_url }}); ">
-                                            </div>
-                                        </a>
+                                        <div class="archives-menu-img">
+                                            <img class="archives-menu-img-bg" width="50" height="50"
+                                                 style="background-image: url({{ post.img_url }}); ">
+                                        </div>
 
                                         <div class="archives-menu-title">
                                             <span class="com-date"><i class="fa fa-calendar"></i> {{ post.created_time|date:"Y-m-d H:i" }}</span>

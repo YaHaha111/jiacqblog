@@ -6,7 +6,7 @@
 <div class="index-img z-index1" style="background-image: url({{ img_url.0.index_img }});">
     <div class="div-center">
         <span style="font-size: 40px; color: #117a8b; font-weight: bold;">{{ img_url.0.name }}</span>
-        <br><br><span id="text" style="font-size: 22px; color: #117a8b; "></span>
+        <br><br><span id="text" style="font-size: 22px; color: #117a8b; "></span><br><br><br><br>
 
     </div>
 
@@ -66,22 +66,16 @@
 						</a>
                     </div>
 
-
                     <div class="kap-side-footer">
                         <span style="font-style: italic"><i class="fa fa-book"></i><a href="{% url 'blog:categories_menu' %}">&nbsp;{{ post.category.bigcategory }}&nbsp;</a>
                             <i class="fa fa-chevron-circle-right"></i><a href="{% url 'blog:category' post.category.pk %}">&nbsp;{{ post.category.name }}&nbsp;</a></span>
                     </div>
-
                 </div>
-
 
                 <div class="col-lg-5 col-sm-12 kap-img">
-                    <a href="{{ post.get_absolute_url }}">
-                        <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
-                        </div>
-                    </a>
+                    <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
+                    </div>
                 </div>
-
 
             </div>
 
@@ -90,10 +84,8 @@
             <div class="mb-4 row kap">
 
                 <div class="col-lg-5 col-sm-12 kap-img">
-                    <a href="{{ post.get_absolute_url }}">
-                        <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
-                        </div>
-                    </a>
+                    <div class="kap-img-bg" style="background-image: url({{ post.img_url }}) ">
+                    </div>
                 </div>
 
                 <div class="col-lg-7 col-sm-12 kap-side" >
